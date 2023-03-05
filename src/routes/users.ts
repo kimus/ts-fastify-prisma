@@ -3,7 +3,7 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { FastifyPluginCallback } from 'fastify';
 import { PrismaClient } from '@prisma/client';
 
-export const UsersRouter: FastifyPluginCallback<{ prisma: PrismaClient }> = (
+const UsersRouter: FastifyPluginCallback<{ prisma: PrismaClient }> = (
   app,
   opts,
   done
@@ -72,3 +72,5 @@ export const UsersRouter: FastifyPluginCallback<{ prisma: PrismaClient }> = (
 
   done();
 };
+
+export default UsersRouter;
