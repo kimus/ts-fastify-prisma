@@ -17,8 +17,7 @@ const app = fastify({
 
 const prisma = new PrismaClient();
 
-// app.register(UsersRouter, { prefix: '/users', prisma });
-
+// register all files in 'routes' folder
 const routesRoot = path.resolve(path.join(__dirname, 'routes'));
 fs.readdirSync(routesRoot).forEach((file) => {
   if (file !== 'index.js') {
