@@ -20,12 +20,15 @@ const prisma = new PrismaClient();
 // register all files in 'routes' folder
 const routesRoot = path.resolve(path.join(__dirname, 'routes'));
 fs.readdirSync(routesRoot).forEach((file) => {
-  if (file !== 'index.js') {
-    var name = file.replace(/.(js|ts)/, '');
-    console.log(`--> added '/${name}' route`);
-    const router = require('./routes/' + file);
-    app.register(router, { prefix: `/${name}`, prisma });
-  }
+  const name = file.replace(/.(js|ts)/, '');
+  console.log(`--> added '/${name}' route`);
+  const router = require('./routes/' + file);
+  app.register(router, { prefix: `/${name}`, prisma });
 });
 
-app.listen({ host: '0.0.0.0', port: +(process.env.port || 3333) });
+const host = process.env.HOST || '0.0.0.0';
+const port = +(process.env.PORT || 3333);
+
+console.log(`listening at http://${host}:${port}/...`);
+
+app.listen({ host, port });
